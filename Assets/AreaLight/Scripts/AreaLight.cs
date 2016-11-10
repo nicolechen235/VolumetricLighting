@@ -170,6 +170,10 @@ public partial class AreaLight : MonoBehaviour
 			Mathf.GammaToLinearSpace(m_Color.b),
 			1.0f);
 		m_props.SetVector("_EmissionColor", color * m_Intensity);
+        if (m_LightTexture != null)
+        {
+            m_props.SetTexture("_EmissionMap", m_LightTexture);
+        }
 		m_SourceRenderer.SetPropertyBlock(m_props);
 
 		SetUpCommandBuffer();
