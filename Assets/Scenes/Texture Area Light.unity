@@ -951,118 +951,15 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 20000013402514154, guid: c946fa75949b4b0469e29c6e49bd3577,
+        type: 2}
+      propertyPath: m_TargetTexture
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 33000012356353452, guid: c946fa75949b4b0469e29c6e49bd3577,
         type: 2}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000011647635530, guid: c946fa75949b4b0469e29c6e49bd3577,
-        type: 2}
-      propertyPath: m_Angle
-      value: 121
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000014113918066, guid: c946fa75949b4b0469e29c6e49bd3577, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 18.381
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000011647635530, guid: c946fa75949b4b0469e29c6e49bd3577,
-        type: 2}
-      propertyPath: m_Size.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000011647635530, guid: c946fa75949b4b0469e29c6e49bd3577,
-        type: 2}
-      propertyPath: m_Shadows
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000011647635530, guid: c946fa75949b4b0469e29c6e49bd3577,
-        type: 2}
-      propertyPath: m_ShadowBias
-      value: 0.0396
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000011647635530, guid: c946fa75949b4b0469e29c6e49bd3577,
-        type: 2}
-      propertyPath: m_Size.z
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000013519192348, guid: c946fa75949b4b0469e29c6e49bd3577,
-        type: 2}
-      propertyPath: m_Shadows
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000011647635530, guid: c946fa75949b4b0469e29c6e49bd3577,
-        type: 2}
-      propertyPath: m_Size.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000013519192348, guid: c946fa75949b4b0469e29c6e49bd3577,
-        type: 2}
-      propertyPath: m_BlurIterations
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000013519192348, guid: c946fa75949b4b0469e29c6e49bd3577,
-        type: 2}
-      propertyPath: m_BlurSize
-      value: 2.32
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000013519192348, guid: c946fa75949b4b0469e29c6e49bd3577,
-        type: 2}
-      propertyPath: m_Bounded
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000011647635530, guid: c946fa75949b4b0469e29c6e49bd3577,
-        type: 2}
-      propertyPath: m_Intensity
-      value: 1.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000011647635530, guid: c946fa75949b4b0469e29c6e49bd3577,
-        type: 2}
-      propertyPath: m_ShadowmapRes
-      value: 1024
-      objectReference: {fileID: 0}
-    - target: {fileID: 1000010046428508, guid: c946fa75949b4b0469e29c6e49bd3577, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000011647635530, guid: c946fa75949b4b0469e29c6e49bd3577,
-        type: 2}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000011647635530, guid: c946fa75949b4b0469e29c6e49bd3577,
-        type: 2}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 23000012433474804, guid: c946fa75949b4b0469e29c6e49bd3577,
-        type: 2}
-      propertyPath: m_LightProbeUsage
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000011647635530, guid: c946fa75949b4b0469e29c6e49bd3577,
-        type: 2}
-      propertyPath: m_LightTexture
-      value: 
-      objectReference: {fileID: 2800000, guid: c521adeea482e314abb60926cde13244, type: 3}
-    - target: {fileID: 23000012433474804, guid: c946fa75949b4b0469e29c6e49bd3577,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000013519192348, guid: c946fa75949b4b0469e29c6e49bd3577,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000011647635530, guid: c946fa75949b4b0469e29c6e49bd3577,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000011647635530, guid: c946fa75949b4b0469e29c6e49bd3577,
-        type: 2}
-      propertyPath: m_Color.r
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c946fa75949b4b0469e29c6e49bd3577, type: 2}
