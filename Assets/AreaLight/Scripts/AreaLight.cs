@@ -70,6 +70,8 @@ public partial class AreaLight : MonoBehaviour
 
 		SetUpLUTs();
 
+        InitLightTexture();
+
 		m_Initialized = true;
 		return true;
 	}

@@ -102,7 +102,7 @@ public partial class FogLight : LightOverride
 				// This step should convert to ESM/VSM
 				// m_BufGrabShadowmap.Blit(shadowmap, targetRT);
 				m_BufGrabShadowmap.SetGlobalTexture("_DirShadowmap", shadowmap);
-				m_BufGrabShadowmap.Blit(null, targetRT, m_BlurShadowmapMaterial, /*sample & convert to VSM*/ 4);
+				//m_BufGrabShadowmap.Blit(null, targetRT, m_BlurShadowmapMaterial, /*sample & convert to VSM*/ 4);
 			}
 			else
 			{
