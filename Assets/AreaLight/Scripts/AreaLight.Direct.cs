@@ -38,6 +38,7 @@ public partial class AreaLight : MonoBehaviour
 			s_AmpDiffAmpSpecFresnel = AreaLightLUT.LoadLUT(AreaLightLUT.LUTType.AmpDiffAmpSpecFresnel);
 
 		m_ProxyMaterial.SetTexture("_TransformInv_Diffuse", s_TransformInvTexture_Diffuse);
+        m_ProxyMaterial.SetTexture("_FilteredLight", m_FilterLightTexture);
 		m_ProxyMaterial.SetTexture("_TransformInv_Specular", s_TransformInvTexture_Specular);
 		m_ProxyMaterial.SetTexture("_AmpDiffAmpSpecFresnel", s_AmpDiffAmpSpecFresnel);
 	}

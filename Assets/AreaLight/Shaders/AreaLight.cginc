@@ -4,6 +4,7 @@
 #if AREA_LIGHT_ENABLE_DIFFUSE
 sampler2D _TransformInv_Diffuse;
 #endif
+sampler2D _FilteredLight;
 sampler2D _TransformInv_Specular;
 sampler2D _AmpDiffAmpSpecFresnel;
 float4x4 _LightVerts;
@@ -162,7 +163,26 @@ half PolygonRadiance(half4x3 L)
 	return max(0, sum);
 }
 
-half TransformedPolygonRadiance(half4x3 L, half2 uv, sampler2D transformInv, half amplitude)
+half3 FetchDiffuseFilteredTexture(sampler2D texLightFiltered, half4x3 ltcTransformed)
+{
+	half3 V1 = ltcTransformed[0] - ltcTransformed[3];
+	half3 V2 = ltcTransformed[2] - ltcTransformed[3];
+	half3 planeOrtho = cross(V1, V2);
+	float planeAreaSquared = dot(planeOrtho, planeOrtho);
+	float planeDistxPlaneArea = dot(planeOrtho, ltcTransformed[3]);
+	half3 P = planeDistxPlaneArea * planeOrtho / planeAreaSquared - ltcTransformed[3];
+	
+	float dotV1V2 = dot(V1, V2);
+	float invV1Sqr = 1.0 / dot(V1, V1);
+	half3 V2_ = V2 - V1 * dotV1V2 * invV1Sqr;
+	half2 Puv = half2(1, 1);
+	Puv.y = dot(V2_, P) / dot(V2_, V2_);
+	Puv.x = dot(V1, P) * invV1Sqr - dotV1V2 * invV1Sqr * Puv.y;
+	
+	return tex2D(texLightFiltered, half2(0.125, 0.125) + Puv * 0.75).rgb;
+}
+
+half3 TransformedPolygonRadiance(half4x3 L, half2 uv, sampler2D transformInv, half amplitude)
 {
 	// Get the inverse LTC matrix M
 	half3x3 Minv = 0;
@@ -171,9 +191,12 @@ half TransformedPolygonRadiance(half4x3 L, half2 uv, sampler2D transformInv, hal
 			
 	// Transform light vertices into diffuse configuration
 	half4x3 LTransformed = mul(L, Minv);
-
 	// Polygon radiance in transformed configuration - specular
-	return PolygonRadiance(LTransformed) * amplitude;
+	half3 textureLight = half3(1, 1, 1);
+	
+	textureLight = FetchDiffuseFilteredTexture(_FilteredLight, LTransformed);
+	
+	return PolygonRadiance(LTransformed) * amplitude * textureLight;
 }
 
 half3 CalculateLight (half3 position, half3 diffColor, half3 specColor, half oneMinusRoughness, half3 N,
@@ -208,17 +231,16 @@ half3 CalculateLight (half3 position, half3 diffColor, half3 specColor, half one
 
 	half3 result = 0;
 #if AREA_LIGHT_ENABLE_DIFFUSE
-	half diffuseTerm = TransformedPolygonRadiance(L, uv, _TransformInv_Diffuse, AmpDiffAmpSpecFresnel.x);
+	half3 diffuseTerm = TransformedPolygonRadiance(L, uv, _TransformInv_Diffuse, AmpDiffAmpSpecFresnel.x);
 	result = diffuseTerm * diffColor;
 #endif
 
-	half specularTerm = TransformedPolygonRadiance(L, uv, _TransformInv_Specular, AmpDiffAmpSpecFresnel.y);
+	half3 specularTerm = TransformedPolygonRadiance(L, uv, _TransformInv_Specular, AmpDiffAmpSpecFresnel.y);
 	half fresnelTerm = specColor + (1.0 - specColor) * AmpDiffAmpSpecFresnel.z;
 	result += specularTerm * fresnelTerm * UNITY_PI;
 
 #if AREA_LIGHT_SHADOWS
 	result *= shadow;
 #endif
-
 	return result * lightColor;
 }
