@@ -5,13 +5,16 @@ using System.Text;
 
 
 
-public partial class AreaLight: MonoBehaviour
+public partial class AreaLight : MonoBehaviour
 {
     [Header("Texture")]
     public Texture2D m_LightTexture;
-    public Texture2D m_FilterLightTexture;
+    private Texture2D m_FilterLightTexture;
+    public string m_TextureFile;
+    private bool initTexture = false;
+    private int m_texHeight;
+    private int m_texWidth;
 
-    private static bool initTexture = false;
     void InitLightTexture()
     {
 
@@ -22,15 +25,22 @@ public partial class AreaLight: MonoBehaviour
         }
 
         initTexture = true;
-        BinaryReader reader = new BinaryReader(File.Open("o2.dds", FileMode.Open, FileAccess.Read));
+        BinaryReader reader = new BinaryReader(File.Open(m_TextureFile, FileMode.Open, FileAccess.Read));
+
+        reader.BaseStream.Seek(12, SeekOrigin.Begin);
+        m_texHeight = reader.ReadInt32();
+
+        reader.BaseStream.Seek(16, SeekOrigin.Begin);
+        m_texWidth = reader.ReadInt32();
+
+        reader.BaseStream.Seek(28, SeekOrigin.Begin);
+        int mipmapCount = reader.ReadInt32();
 
         int offset = 128;
-        int mipmapCount = 12;
         int size = 1 << (mipmapCount - 1);
 
-        m_FilterLightTexture = new Texture2D(2048, 2048, TextureFormat.RGBA32, true);
+        m_FilterLightTexture = new Texture2D(m_texWidth, m_texHeight, TextureFormat.RGBA32, true);
         m_FilterLightTexture.wrapMode = TextureWrapMode.Clamp;
-
         for (int mIndex = 0; mIndex < mipmapCount; mIndex++) {
             reader.BaseStream.Seek(offset, SeekOrigin.Begin);
             byte[] tmpBytes = reader.ReadBytes(size * size * 4);

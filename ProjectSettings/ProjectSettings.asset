@@ -510,7 +510,7 @@ PlayerSettings:
   XboxOne::VR::enabledDevices: []
   iOS::VR::enabledDevices: []
   tvOS::VR::enabledDevices: []
-  cloudProjectId: 
-  projectName: 
-  organizationId: 
+  cloudProjectId: 441e6d54-679c-4695-9aad-e57b138c48c1
+  projectName: VolumetricLighting
+  organizationId: nicolechen235
   cloudEnabled: 0
