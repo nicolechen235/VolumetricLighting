@@ -204,7 +204,7 @@ MonoBehaviour:
   m_BlurShadowmapShader: {fileID: 4800000, guid: 701192b62a7678549918bc87434699fe,
     type: 3}
   m_LightTexture: {fileID: 2800000, guid: c521adeea482e314abb60926cde13244, type: 3}
-  m_FilterLightTexture: {fileID: 0}
+  m_TextureFile: 
   m_RenderSource: 1
   m_Size: {x: 2, y: 2, z: 10}
   m_Angle: 121
