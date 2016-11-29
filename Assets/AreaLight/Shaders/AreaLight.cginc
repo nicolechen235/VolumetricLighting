@@ -182,8 +182,8 @@ half3 FetchDiffuseFilteredTexture(sampler2D texLightFiltered, half4x3 ltcTransfo
 	Puv.x = dot(V1, P) * invV1Sqr - dotV1V2 * invV1Sqr * Puv.y;	
 	float d = abs(planeDistxPlaneArea) / pow(planeAreaSquared, 0.75);
 	
-	//return tex2D(texLightFiltered, half2(0.125, 0.125) + Puv.xy * 0.75).rgb;
-	return tex2Dlod(texLightFiltered, half4(0.125, 0.125, 0, log(2048.0 * d) / log(4.0)) + Puv.xyzz * 0.75).rgb;
+	Puv.x = 1.f - Puv.x;
+	return tex2Dlod(texLightFiltered, half4(0.125, 0.125, 0, log(2048.0 * d) / log(8.0)) + Puv.xyzz * 0.75).rgb;
 }
 
 half3 TransformedPolygonRadiance(half4x3 L, half2 uv, sampler2D transformInv, half amplitude)

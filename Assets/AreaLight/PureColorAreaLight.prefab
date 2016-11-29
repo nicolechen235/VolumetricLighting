@@ -39,7 +39,7 @@ GameObject:
   - 33: {fileID: 33000013647807332}
   - 23: {fileID: 23000012379546160}
   m_Layer: 0
-  m_Name: WhiteLight
+  m_Name: PureColorAreaLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -212,7 +212,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011938562008}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 792909cacf2415c48a1d7eebef426b5d, type: 3}
   m_Name: 

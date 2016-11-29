@@ -67,7 +67,7 @@ GameObject:
   - 33: {fileID: 33000012356353452}
   - 23: {fileID: 23000012433474804}
   m_Layer: 0
-  m_Name: AreaLight
+  m_Name: TextureAreaLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
