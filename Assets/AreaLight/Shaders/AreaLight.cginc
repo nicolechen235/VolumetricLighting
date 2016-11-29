@@ -203,25 +203,6 @@ half3 TransformedPolygonRadiance(half4x3 L, half2 uv, sampler2D transformInv, ha
 	return PolygonRadiance(LTransformed) * amplitude * textureLight;
 }
 
-half3 DiffuseTransformedPolygonRadiance(half4x3 L, half2 uv, sampler2D transformInv, half amplitude)
-{
-	// Get the inverse LTC matrix M
-	half3x3 Minv = 0;
-	//Minv._m00_m11_m22 = 1;
-	
-	Minv._m22 = 1;
-	Minv._m00_m02_m11_m20 = tex2D(transformInv, uv);
-		
-	// Transform light vertices into diffuse configuration
-	half4x3 LTransformed = mul(L, Minv);
-	// Polygon radiance in transformed configuration - specular
-	half3 textureLight = half3(1, 1, 1);
-	
-	textureLight = FetchDiffuseFilteredTexture(_FilteredLight, LTransformed);
-	
-	return PolygonRadiance(LTransformed) * amplitude * textureLight;
-}
-
 half3 CalculateLight (half3 position, half3 diffColor, half3 specColor, half oneMinusRoughness, half3 N,
 	half3 lightPos, half3 lightColor)
 {
@@ -254,7 +235,7 @@ half3 CalculateLight (half3 position, half3 diffColor, half3 specColor, half one
 
 	half3 result = 0;
 #if AREA_LIGHT_ENABLE_DIFFUSE
-	half3 diffuseTerm = DiffuseTransformedPolygonRadiance(L, uv, _TransformInv_Diffuse, AmpDiffAmpSpecFresnel.x);
+	half3 diffuseTerm = TransformedPolygonRadiance(L, uv, _TransformInv_Diffuse, AmpDiffAmpSpecFresnel.x);
 	result = diffuseTerm * diffColor;
 #endif
 

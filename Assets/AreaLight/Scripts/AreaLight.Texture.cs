@@ -10,14 +10,14 @@ public partial class AreaLight : MonoBehaviour
     [Header("Texture")]
     public bool m_UseTextureLight;
     public Texture2D m_LightTexture;
-    public Texture2D m_FilterLightTexture;
     public string m_TextureFile;
 
+    private Texture2D m_FilterLightTexture;
     void InitLightTexture()
     {
         if (!m_UseTextureLight) {
             Debug.LogWarning("Did not use the texture light for " + this.name);
-            m_FilterLightTexture = null;
+            m_FilterLightTexture = AreaLightTextureManager.Instance.GetTexture("White");
             return;
         }
 

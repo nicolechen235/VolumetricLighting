@@ -2,31 +2,50 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AreaLightTextureManager
+public class AreaLightTextureManager : MonoBehaviour
 {
 
-    private static AreaLightTextureManager instance;
+    private static AreaLightTextureManager s_Instance;
 
-    private Dictionary<string, Texture2D> textures;
-    private AreaLightTextureManager() {
-        textures = new Dictionary<string, Texture2D>();
-    }
+    private Dictionary<string, Texture2D> m_Textures = new Dictionary<string, Texture2D>();
+
 
     public static AreaLightTextureManager Instance
     {
         get
         {
-            if (instance == null)
+            if (s_Instance == null)
             {
-                instance = new AreaLightTextureManager();
+                s_Instance = (AreaLightTextureManager) FindObjectOfType(typeof(AreaLightTextureManager));
             }
-            return instance;
+            return s_Instance;
+        }
+    }
+
+    public static Dictionary<string, Texture2D> GetTextures()
+    {
+        Debug.Log("Textures initialize");
+        AreaLightTextureManager instance = Instance;
+        return instance == null ? new Dictionary<string, Texture2D>() : instance.m_Textures;
+    }
+
+    public Texture2D GetTexture(string texName) {
+        if (m_Textures.ContainsKey(texName))
+        {
+            return m_Textures[texName];
+        }
+        else
+        {
+            if (!m_Textures.ContainsKey("White")) {
+                m_Textures.Add("White", Texture2D.whiteTexture);
+            }
+            return m_Textures["White"];
         }
     }
 
     public Texture2D AddTexture(string texName) {
-        if (textures.ContainsKey(texName)) {
-            return textures[texName];
+        if (m_Textures.ContainsKey(texName)) {
+            return m_Textures[texName];
         }
         Texture2D filteredLightTexture;
         BinaryReader reader = new BinaryReader(File.Open(texName, FileMode.Open, FileAccess.Read));
@@ -61,7 +80,7 @@ public class AreaLightTextureManager
 
         filteredLightTexture.Apply(false);
 
-        textures.Add(texName, filteredLightTexture);
+        m_Textures.Add(texName, filteredLightTexture);
         return filteredLightTexture; 
     }
 }
