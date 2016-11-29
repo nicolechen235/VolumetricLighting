@@ -17,6 +17,7 @@ public partial class AreaLight : MonoBehaviour
     {
         if (!m_UseTextureLight) {
             Debug.LogWarning("Did not use the texture light for " + this.name);
+            m_LightTexture = null;
             m_FilterLightTexture = AreaLightTextureManager.Instance.GetTexture("White");
             return;
         }
